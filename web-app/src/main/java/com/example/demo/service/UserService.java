@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
+
+import jakarta.persistence.OptimisticLockException;
 
 @Service
 public class UserService {
@@ -32,5 +35,20 @@ public class UserService {
 
 	public void deleteUser(Long id) {
 		userRepository.deleteById(id);
+	}
+
+	@Transactional
+	public User updateUser(User user) {
+		User currentUser = userRepository.findOneForUpdate(user.getId());
+
+		if (currentUser.getUpdateDate().equals(user.getUpdateDate())) {
+			LocalDateTime now = LocalDateTime.now();
+			user.setUpdateDate(now);
+			return userRepository.save(user);
+
+		} else {
+			String message = "データが他の方によって更新されたようです。一覧画面に戻ってから再実施してください。";
+			throw new OptimisticLockException(message);
+		}
 	}
 }
