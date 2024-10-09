@@ -11,7 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.entity.Config;
+import com.example.demo.entity.Config2;
+import com.example.demo.entity.Config3;
 import com.example.demo.entity.User;
+import com.example.demo.service.Config2Service;
+import com.example.demo.service.Config3Service;
+import com.example.demo.service.ConfigService;
 import com.example.demo.service.UserService;
 
 import jakarta.persistence.OptimisticLockException;
@@ -25,6 +31,15 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	ConfigService configService;
+
+	@Autowired
+	Config2Service config2Service;
+
+	@Autowired
+	Config3Service config3Service;
+
 	/**
 	 * ユーザーの一覧画面を表示する。
 	 *
@@ -33,10 +48,23 @@ public class UserController {
 	 */
 
 	@GetMapping("/user/list")
-	public String displayList(Model model) {
+	public String displayUserList(Model model) {
 		List<User> userList = userService.searchAll();
 		model.addAttribute("userList", userList);
+
+		List<Config2> config2 = config2Service.searchAll(); // ユーザ情報を取得
+		model.addAttribute("config2", config2);
+
+		List<Config3> config3 = config3Service.searchAll(); // ユーザ情報を取得
+		model.addAttribute("config3", config3);
+
 		return "user/list";
+	}
+
+	@GetMapping("/user/index")
+	public String displayuserindex(Model model) {
+
+		return "index";
 	}
 
 	/**
@@ -49,9 +77,19 @@ public class UserController {
 	 */
 
 	@GetMapping("/user/{id}")
-	public String displayDetail(@PathVariable Long id, Model model) {
+	public String displayUserDetail(@PathVariable Long id, Model model) {
 		User user = userService.search(id);
 		model.addAttribute("user", user);
+
+		List<Config> config = configService.searchAll(); // ユーザ情報を取得
+		model.addAttribute("config", config);
+
+		List<Config2> config2 = config2Service.searchAll(); // ユーザ情報を取得
+		model.addAttribute("config2", config2);
+
+		List<Config3> config3 = config3Service.searchAll(); // ユーザ情報を取得
+		model.addAttribute("config3", config3);
+
 		return "user/detail";
 	}
 
@@ -63,9 +101,19 @@ public class UserController {
 	 */
 
 	@GetMapping("/user/add")
-	public String displayAdd(Model model) {
+	public String displayUserAdd(Model model) {
 		User user = new User();
 		model.addAttribute("user", user);
+
+		List<Config> config = configService.searchAll(); // ユーザ情報を取得
+		model.addAttribute("config", config);
+
+		List<Config2> config2 = config2Service.searchAll(); // ユーザ情報を取得
+		model.addAttribute("config2", config2);
+
+		List<Config3> config3 = config3Service.searchAll(); // ユーザ情報を取得
+		model.addAttribute("config3", config3);
+
 		return "user/add";
 	}
 
@@ -84,6 +132,16 @@ public class UserController {
 	@PostMapping("/user/create")
 	public String createUser(@Validated User user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+
+			List<Config> config = configService.searchAll(); // ユーザ情報を取得
+			model.addAttribute("config", config);
+
+			List<Config2> config2 = config2Service.searchAll(); // ユーザ情報を取得
+			model.addAttribute("config2", config2);
+
+			List<Config3> config3 = config3Service.searchAll(); // ユーザ情報を取得
+			model.addAttribute("config3", config3);
+
 			return "user/add";
 		}
 		userService.createUser(user);
@@ -114,10 +172,19 @@ public class UserController {
 	 */
 
 	@GetMapping("/user/{id}/edit")
-	public String displayEdit(@PathVariable Long id, Model model) {
+	public String displayUserEdit(@PathVariable Long id, Model model) {
 
 		User user = userService.search(id);
 		model.addAttribute("user", user);
+
+		List<Config> config = configService.searchAll(); // ユーザ情報を取得
+		model.addAttribute("config", config);
+
+		List<Config2> config2 = config2Service.searchAll(); // ユーザ情報を取得
+		model.addAttribute("config2", config2);
+
+		List<Config3> config3 = config3Service.searchAll(); // ユーザ情報を取得
+		model.addAttribute("config3", config3);
 
 		return "user/edit";
 	}
@@ -134,6 +201,16 @@ public class UserController {
 	public String updateUser(@Validated User user, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
+
+			List<Config> config = configService.searchAll(); // ユーザ情報を取得
+			model.addAttribute("config", config);
+
+			List<Config2> config2 = config2Service.searchAll(); // ユーザ情報を取得
+			model.addAttribute("config2", config2);
+
+			List<Config3> config3 = config3Service.searchAll(); // ユーザ情報を取得
+			model.addAttribute("config3", config3);
+
 			return "user/edit";
 		}
 
@@ -143,6 +220,16 @@ public class UserController {
 
 		} catch (OptimisticLockException e) {
 			model.addAttribute("message", e.getMessage());
+
+			List<Config> config = configService.searchAll(); // ユーザ情報を取得
+			model.addAttribute("config", config);
+
+			List<Config2> config2 = config2Service.searchAll(); // ユーザ情報を取得
+			model.addAttribute("config2", config2);
+
+			List<Config3> config3 = config3Service.searchAll(); // ユーザ情報を取得
+			model.addAttribute("config3", config3);
+
 			return "user/edit";
 		}
 	}

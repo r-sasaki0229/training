@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/head :: head_fragment(scripts = ~{::script}, links = ~{::link})}">
+</head>
+<body>
+  <div class="container">
+    <div class="fixed-top bg-white">
+      <div class="text-center bg-white">
+        <h1>設定: 一覧画面</h1>
+        <br>
+        <div class="text-end">
+          <a th:href="@{/qanda/index}" class="btn btn-primary">ホームに戻る</a>
+          <a th:href="@{/qanda/add}" class="btn btn-primary">新規登録はこちら</a>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>質問</th>
+          <th>回答</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="qanda: ${qandaList}" th:object="${qanda}">
+          <td class="center" th:text="*{id}"></td>
+          <td th:text="*{question}"></td>
+          <td th:text="*{answer}"></td>
+          <td><a th:href="@{/qanda/{id}(id=*{id})}" class="btn btn-secondary">詳細</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

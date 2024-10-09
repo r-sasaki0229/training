@@ -4,31 +4,55 @@
 </head>
 <body>
   <div class="container">
-    <h1>ユーザー情報: 一覧画面</h1>
-    <br>
-    
-    <div class="float-end">
-      <a th:href="@{/user/add}" class="btn btn-primary">新規登録はこちら</a>
+    <div class="fixed-top bg-white">
+      <div class="text-center bg-white">
+        <h1>顧客情報: 一覧画面</h1>
+        <br>
+        <div class="text-end">
+          <a th:href="@{/user/index}" class="btn btn-primary">ホームに戻る</a>
+          <a th:href="@{/user/add}" class="btn btn-primary">新規登録はこちら</a>
+        </div>
+      </div>
     </div>
-    
+    <br>
+    <br>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>名前</th>
-          <th>住所</th>
+          <th>会社名</th>
           <th>電話番号</th>
-          <th>更新日時</th>
+          <th>担当者部署名</th>
+          <th>担当者氏名</th>
+          <th>導入製品</th>
+          <th>ステータス</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr th:each="user: ${userList}" th:object="${user}">
-          <td class="center" th:text="*{id}"></td>
-          <td th:text="*{name}"></td>
-          <td th:text="*{address}"></td>
-          <td class="center" th:text="*{phone}"></td>
-          <td class="center" th:text="*{#temporals.format(updateDate, 'yyyy/MM/dd HH:mm:ss')}"></td>
+          <td class="center" th:text="*{companyname}"></td>
+          <td th:text="*{phone}"></td>
+          <td th:text="*{depmentname}"></td>
+          <td class="center" th:text="*{manegername}"></td>
+          <td class="center">
+            <select th:value="*{product}">
+              <option th:each="config2: ${config2}" 
+                      th:value="${config2.id}"
+                      th:text="${config2.name}"
+                      th:selected="${config2.id == 2}">
+              </option>
+            </select>
+          </td>
+          <td class="center">
+            <select class="config3-select" 
+                    th:value="*{status}">
+              <option th:each="config3: ${config3}" 
+                      th:value="${config3.id}"
+                      th:text="${config3.name}" 
+                      th:selected="${config3.id == 2}">
+              </option>
+            </select>
+          </td>
           <td><a th:href="@{/user/{id}(id=*{id})}" class="btn btn-secondary">詳細</a></td>
         </tr>
       </tbody>

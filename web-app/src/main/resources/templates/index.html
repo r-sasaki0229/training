@@ -5,16 +5,24 @@
 <body>
 
   <div class="container">
-    <h1>Index画面</h1>
+    <h1>Customer Information Manager</h1>
     <br>
 
     <p th:text="${message}"></p>
     <p th:text="${#temporals.format(datetime, 'yyyy/MM/dd HH:mm:ss')}"></p>
     <br>
 
-    <a th:href="@{/user/list}" class="btn btn-primary">ユーザー情報一覧はこちら</a>
+    <a th:href="@{/user/list}" class="btn btn-primary">顧客情報一覧</a>
     <br>
-
+    <br>
+    <a th:href="@{/qanda/list}" class="btn btn-primary">過去のQ&A一覧</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <a th:href="@{/config/list}" class="btn btn-primary">メンテナンス画面（会社規模）</a>
+    <a th:href="@{/config2/list}" class="btn btn-primary">メンテナンス画面（導入製品）</a>
+    <a th:href="@{/config3/list}" class="btn btn-primary">メンテナンス画面（ステータス）</a>
   </div>
 
 </body>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/head :: head_fragment(scripts = ~{::script}, links = ~{::link})}">
+</head>
+<body>
+  <div class="container" th:object="${config3}">
+    <div class="fixed-top bg-white">
+      <div class="text-center bg-white">
+        <h1>ステータス: 詳細画面</h1>
+        <br>
+        <div class="text-end">
+          <a th:href="@{/config3/list}" class="col-2 btn btn-secondary">一覧に戻る</a>
+          <a th:href="@{/config3/{id}/edit(id=*{id})}" class="col-2 btn btn-primary">編集する</a>
+          <a th:href="@{/config3/{id}/delete(id=*{id})}" class="col-2 btn btn-danger">削除する</a>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">ID:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{id}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">名称:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{name}"></label>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

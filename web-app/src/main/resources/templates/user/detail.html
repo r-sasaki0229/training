@@ -5,9 +5,45 @@
 <body>
 
   <div class="container" th:object="${user}">
-    <h1>ユーザー情報: 詳細画面</h1>
+    <div class="fixed-top bg-white">
+      <div class="text-center bg-white">
+        <h1>顧客情報: 詳細画面</h1>
+        <br>
+        <div class="text-end">
+          <a th:href="@{/user/list}" class="col-2 btn btn-secondary">一覧に戻る</a>
+          <a th:href="@{/user/{id}/edit(id=*{id})}" class="col-2 btn btn-primary">編集する</a>
+          <a class="col-2 btn btn-danger" th:attr="data-user-id=${user.id}" onclick="deleteUser(this.dataset.userId)">削除する</a>
+        </div>
+        
+        <script>
+  function deleteUser(userId) {
+    if (confirm("本当に削除しますか？")) {
+      // fetch API を使用してDELETEリクエストを送信
+      fetch(`/user/${userId}/delete`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (response.ok) {
+          // 削除成功時の処理 (例: 一覧画面へリダイレクト)
+          alert('削除しました');
+          window.location.href = '/user/list';
+        } else {
+          // 削除失敗時の処理
+          alert('削除に失敗しました');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+  }
+</script>
+  
+      </div>
+    </div>
     <br>
-
+    <br>
+    <br>
     <div class="row">
       <label class="col-2 border bg-light col-form-label ">ID:</label>
       <div class="col border">
@@ -15,9 +51,27 @@
       </div>
     </div>
     <div class="row">
-      <label class="col-2 border bg-light col-form-label ">名前:</label>
+      <label class="col-2 border bg-light col-form-label ">会社名:</label>
       <div class="col border">
-        <label class="col-form-label" th:text="*{name}"></label>
+        <label class="col-form-label" th:text="*{companyname}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">代表取締役氏名:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{ceoname}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">電話番号:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{phone}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">郵便番号:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{addressnumber}"></label>
       </div>
     </div>
     <div class="row">
@@ -27,11 +81,104 @@
       </div>
     </div>
     <div class="row">
-      <label class="col-2 border bg-light col-form-label ">電話番号:</label>
+      <label class="col-2 border bg-light col-form-label ">担当者部署:</label>
       <div class="col border">
-        <label class="col-form-label" th:text="*{phone}"></label>
+        <label class="col-form-label" th:text="*{depmentname}"></label>
       </div>
     </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">担当者氏名:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{manegername}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label d-flex align-items-center" for="inputscale">会社規模:</label>
+      <div class="col border p-2">
+        <select class="config-select" th:field="*{scale}" th:disabled="true">
+          <option th:each="config : ${config}" th:value="${config.id}" th:text="${config.name}" th:selected="${config.id == 1}"></option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label d-flex align-items-center" for="inputproduct">導入製品:</label>
+      <div class="col border p-2">
+        <select class="config2-select" th:field="*{product}" th:disabled="true">
+          <option th:each="config2 : ${config2}" th:value="${config2.id}" th:text="${config2.name}" th:selected="${config2.id == 1}"></option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label d-flex align-items-center" for="inputstatus">ステータス:</label>
+      <div class="col border p-2">
+        <select class="config3-select" th:field="*{status}" th:disabled="true">
+          <option th:each="config3 : ${config3}" th:value="${config3.id}" th:text="${config3.name}" th:selected="${config3.id == 1}"></option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">契約開始日:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{#temporals.format(contrastartymd, 'yyyy/MM/dd')}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">稼働開始日:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{#temporals.format(introstartymd, 'yyyy/MM/dd')}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">保守開始日:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{#temporals.format(maintestartymd, 'yyyy/MM/dd')}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">契約終了日:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{#temporals.format(contraendymd, 'yyyy/MM/dd')}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">資料置場:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{docpass}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">導入メンバー:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{introname}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">導入メンバーメールアドレス:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{introcontactmail}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">導入メンバー電話番号:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{introcontactphone}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">保守メンバー:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{maintename}"></label>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-2 border bg-light col-form-label ">備考:</label>
+      <div class="col border">
+        <label class="col-form-label" th:text="*{remark}"></label>
+      </div>
+    </div>
+
+    <!--  -->
+
     <div class="row">
       <label class="col-2 border bg-light col-form-label ">更新日時:</label>
       <div class="col border">
@@ -50,14 +197,6 @@
         <label class="col-form-label" th:text="*{#temporals.format(deleteDate, 'yyyy/MM/dd HH:mm:ss')}"></label>
       </div>
     </div>
-    <br>
-
-    <div class="text-center">
-      <a th:href="@{/user/list}" class="col-2 btn btn-secondary">一覧に戻る</a>
-      <a th:href="@{/user/{id}/edit(id=*{id})}" class="col-2 btn btn-primary">編集する</a>
-      <a th:href="@{/user/{id}/delete(id=*{id})}" class="col-2 btn btn-danger">削除する</a>
-    </div>
-
   </div>
 
 </body>
