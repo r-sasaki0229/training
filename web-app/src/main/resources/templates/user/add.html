@@ -8,6 +8,7 @@
       <div class="fixed-top bg-white">
         <div class="text-center bg-white">
           <h1>顧客情報: 登録画面</h1>
+          <!-- <label th:if="${message != ''}" class="text-danger" th:text="${message}"></label> -->
           <br>
           <div class="text-end">
             <a th:href="@{/user/list}" class="col-2 btn btn-secondary">一覧に戻る</a>
@@ -23,31 +24,38 @@
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputcompanyname">会社名:&nbsp;<span class="badge bg-danger">必須</span></label>
-        <input type="text" class="form-control" id="inputcompanyname" th:field="*{companyname}" placeholder="サンプル株式会社">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputcompanyname" th:field="*{companyname}" placeholder="サンプル株式会社">
+        <div class="invalid-feedback" th:errors="*{companyname}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputceoname">代表取締役氏名:</label>
-        <input type="text" class="form-control" id="inputceoname" th:field="*{ceoname}" placeholder="サンプル太郎">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputceoname" th:field="*{ceoname}" placeholder="サンプル太郎">
+        <div class="invalid-feedback" th:errors="*{ceoname}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputphone">電話番号:&nbsp;<span class="badge bg-danger">必須</span></label>
-        <input type="text" class="form-control" id="inputphone" th:field="*{phone}" placeholder="0120-1234-1234">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputphone" th:field="*{phone}" placeholder="0120-1234-1234">
+        <div class="invalid-feedback" th:errors="*{phone}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputaddressnumber">郵便番号:</label>
-        <input type="text" class="form-control" id="inputaddressnumber" th:field="*{addressnumber}" placeholder="123-4567">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputaddressnumber" th:field="*{addressnumber}" placeholder="123-4567">
+        <div class="invalid-feedback" th:errors="*{addressnumber}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputaddress">住所:</label>
-        <input type="text" class="form-control" id="inputaddress" th:field="*{address}" placeholder="東京都新宿区1-2-3歌舞伎町ビル10F">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputaddress" th:field="*{address}" placeholder="東京都新宿区1-2-3歌舞伎町ビル10F">
+        <div class="invalid-feedback" th:errors="*{address}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputdepmentname">担当者部署:&nbsp;<span class="badge bg-danger">必須</span></label>
-        <input type="text" class="form-control" id="inputdepmentname" th:field="*{depmentname}" placeholder="サンプル部署">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputdepmentname" th:field="*{depmentname}" placeholder="サンプル部署">
+        <div class="invalid-feedback" th:errors="*{depmentname}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputmanegername">担当者氏名:&nbsp;<span class="badge bg-danger">必須</span></label>
-        <input type="text" class="form-control" id="inputmanegername" th:field="*{manegername}" placeholder="サンプル次郎">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputmanegername" th:field="*{manegername}" placeholder="サンプル次郎">
+        <div class="invalid-feedback" th:errors="*{manegername}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputscale">会社規模:</label>
@@ -69,43 +77,53 @@
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputcontrastartymd">契約開始日:</label>
-        <input type="text" class="form-control" id="inputcontrastartymd" th:field="*{contrastartymd}" placeholder="2020/10/01">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputcontrastartymd" th:field="*{contrastartymd}" placeholder="2020/10/01">
+        <div class="invalid-feedback" th:errors="*{contrastartymd}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputintrostartymd">稼働開始日:</label>
-        <input type="text" class="form-control" id="inputintrostartymd" th:field="*{introstartymd}" placeholder="2021/04/01">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputintrostartymd" th:field="*{introstartymd}" placeholder="2021/04/01">
+        <div class="invalid-feedback" th:errors="*{introstartymd}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputmaintestartymd">保守開始日:</label>
-        <input type="text" class="form-control" id="inputmaintestartymd" th:field="*{maintestartymd}" placeholder="2021/04/01">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputmaintestartymd" th:field="*{maintestartymd}" placeholder="2021/04/01">
+        <div class="invalid-feedback" th:errors="*{maintestartymd}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputcontraendymd">契約終了日:</label>
-        <input type="text" class="form-control" id="inputcontraendymd" th:field="*{contraendymd}" placeholder="2040/03/31">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputcontraendymd" th:field="*{contraendymd}" placeholder="2040/03/31">
+        <div class="invalid-feedback" th:errors="*{contraendymd}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputdocpass">資料置場:</label>
-        <input type="text" class="form-control" id="inputdocpass" th:field="*{docpass}" placeholder="\\sang.co.jp\sangfs\顧客別資料">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputdocpass" th:field="*{docpass}" placeholder="\\sang.co.jp\sangfs\顧客別資料">
+        <div class="invalid-feedback" th:errors="*{docpass}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputintroname">導入メンバー:</label>
-        <input type="text" class="form-control" id="inputintroname" th:field="*{introname}" placeholder="サンプルA、サンプルB、サンプルC">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputintroname" th:field="*{introname}" placeholder="サンプルA、サンプルB、サンプルC">
+        <div class="invalid-feedback" th:errors="*{introname}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputintrocontactmail">導入メンバーメールアドレス:</label>
-        <input type="text" class="form-control" id="inputintrocontactmail" th:field="*{introcontactmail}" placeholder="sampleA@address.com、sampleB@address.com、sampleC@address.com">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputintrocontactmail" th:field="*{introcontactmail}" placeholder="sampleA@address.com、sampleB@address.com、sampleC@address.com">
+        <div class="invalid-feedback" th:errors="*{introcontactmail}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputintrocontactphone">導入メンバー電話番号:</label>
-        <input type="text" class="form-control" id="inputintrocontactphone" th:field="*{introcontactphone}" placeholder="080-1234-5678、080-2345-6789、080-3456-7890">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputintrocontactphone" th:field="*{introcontactphone}" placeholder="080-1234-5678、080-2345-6789、080-3456-7890">
+        <div class="invalid-feedback" th:errors="*{introcontactphone}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputmaintename">保守メンバー:</label>
-        <input type="text" class="form-control" id="inputmaintename" th:field="*{maintename}" placeholder="サンプルD、サンプルE、サンプルF">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputmaintename" th:field="*{maintename}" placeholder="サンプルD、サンプルE、サンプルF">
+        <div class="invalid-feedback" th:errors="*{maintename}"></div>
       </div>
       <div class="form-group mt-2">
         <label class="form-label" for="inputremark">備考:</label>
-        <input type="text" class="form-control" id="inputremark" th:field="*{remark}" placeholder="特筆すべき情報を記載">
+        <input type="text" class="form-control" th:errorclass="is-invalid" id="inputremark" th:field="*{remark}" placeholder="特筆すべき情報を記載">
+        <div class="invalid-feedback" th:errors="*{remark}"></div>
       </div>
     </form>
   </div>

@@ -132,6 +132,7 @@ public class UserController {
 	@PostMapping("/user/create")
 	public String createUser(@Validated User user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute("message", result.getFieldError().toString());
 
 			List<Config> config = configService.searchAll(); // ユーザ情報を取得
 			model.addAttribute("config", config);

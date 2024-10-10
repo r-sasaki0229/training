@@ -65,15 +65,13 @@ public class User {
 	private String manegername;
 
 	@Column(name = "scale")
-	private String scale;
+	private int scale;
 
 	@Column(name = "product")
-	@NotBlank(message = "導入製品を入力してください")
-	private String product;
+	private int product;
 
 	@Column(name = "status")
-	@NotBlank(message = "ステータスを入力してください")
-	private String status;
+	private int status;
 
 	@Column(name = "contrastartymd")
 	private LocalDate contrastartymd;

@@ -35,21 +35,20 @@
           <td th:text="*{depmentname}"></td>
           <td class="center" th:text="*{manegername}"></td>
           <td class="center">
-            <select th:value="*{product}">
+            <select th:value="*{product}" th:disabled="true">
               <option th:each="config2: ${config2}" 
                       th:value="${config2.id}"
                       th:text="${config2.name}"
-                      th:selected="${config2.id == 2}">
+                      th:selected="${config2.id == user.product}">
               </option>
             </select>
           </td>
           <td class="center">
-            <select class="config3-select" 
-                    th:value="*{status}">
+            <select th:value="*{status}" th:disabled="true">
               <option th:each="config3: ${config3}" 
                       th:value="${config3.id}"
                       th:text="${config3.name}" 
-                      th:selected="${config3.id == 2}">
+                      th:selected="${config3.id == user.status}">
               </option>
             </select>
           </td>
